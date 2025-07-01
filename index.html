@@ -6,52 +6,46 @@
   <title>پرداخت Stars</title>
   <style>
     body {
-      font-family: sans-serif;
       background: #111;
-      color: #fff;
+      color: white;
+      font-family: sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      margin: 0;
-      text-align: center;
       padding: 20px;
+      text-align: center;
     }
     button {
       padding: 15px 30px;
       font-size: 18px;
-      border: none;
-      border-radius: 8px;
       background: #0088cc;
       color: white;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
       margin-top: 20px;
-    }
-    button:disabled {
-      background: gray;
-      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
-  <h2>انتقال ۱۰ استارز به @MSF_sss</h2>
-  <p>برای پرداخت روی دکمه زیر کلیک کن.</p>
-  <button id="payBtn">پرداخت با Stars</button>
+  <h2>پرداخت 10 استارز به @MSF_sss</h2>
+  <p>برای پرداخت، روی دکمه زیر کلیک کن و بعد در چت ارسالش کن.</p>
+  <button onclick="copy()">📋 کپی دستور پرداخت</button>
+  <p id="done" style="display:none; margin-top: 15px;">✅ کپی شد! حالا در چت بفرست</p>
 
   <script>
-    const payBtn = document.getElementById("payBtn");
+    function copy() {
+      const msg = "pay 10 to @MSF_sss";
+      navigator.clipboard.writeText(msg).then(() => {
+        document.getElementById("done").style.display = "block";
+        Telegram.WebApp.close(); // بستن WebApp بعد از کپی
+      });
+    }
 
-    if (window.Telegram.WebApp) {
+    if (window.Telegram && Telegram.WebApp) {
       Telegram.WebApp.ready();
-
-      payBtn.onclick = () => {
-        // باز کردن پرداخت Stars به صورت inline
-        Telegram.WebApp.switchInlineQuery('pay 10 to @MSF_sss', false);
-      };
-    } else {
-      payBtn.disabled = true;
-      payBtn.textContent = "فقط در اپلیکیشن تلگرام قابل استفاده است.";
     }
   </script>
 </body>
