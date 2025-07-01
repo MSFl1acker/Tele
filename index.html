@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="fa">
+<!DOCTYPE html>
+<html lang="fa">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +15,8 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      text-align: center;
+      padding: 20px;
     }
     button {
       padding: 15px 30px;
@@ -23,30 +26,32 @@
       background: #0088cc;
       color: white;
       cursor: pointer;
+      margin-top: 20px;
     }
     button:disabled {
       background: gray;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
-  <h2>انتقال 10 استارز به @MSF_sss</h2>
-  <p>لطفاً روی دکمه زیر بزن تا پرداخت انجام بشه.</p>
-  <button id="payBtn">پرداخت با Stars</button>  <script>
+  <h2>انتقال ۱۰ استارز به @MSF_sss</h2>
+  <p>روی دکمه زیر بزن تا پرداخت Stars انجام بشه.</p>
+  <button id="payBtn">پرداخت با Stars</button>
+
+  <script>
     const payBtn = document.getElementById("payBtn");
 
-    // بررسی پشتیبانی WebApp
     if (window.Telegram.WebApp) {
       Telegram.WebApp.ready();
 
       payBtn.onclick = () => {
-        Telegram.WebApp.openInvoice({
-          slug: "send?to=MSF_sss&amount=10"
-        });
+        Telegram.WebApp.switchInlineQuery('pay 10 to @MSF_sss', false);
       };
     } else {
       payBtn.disabled = true;
-      payBtn.textContent = "مرورگر شما پشتیبانی نمی‌کند";
+      payBtn.textContent = "این صفحه فقط در اپلیکیشن تلگرام کار می‌کند.";
     }
-  </script></body>
+  </script>
+</body>
 </html>
