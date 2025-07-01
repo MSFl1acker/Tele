@@ -36,7 +36,7 @@
 </head>
 <body>
   <h2>انتقال ۱۰ استارز به @MSF_sss</h2>
-  <p>روی دکمه زیر بزن تا پرداخت Stars انجام بشه.</p>
+  <p>برای پرداخت روی دکمه زیر کلیک کن.</p>
   <button id="payBtn">پرداخت با Stars</button>
 
   <script>
@@ -46,11 +46,12 @@
       Telegram.WebApp.ready();
 
       payBtn.onclick = () => {
+        // باز کردن پرداخت Stars به صورت inline
         Telegram.WebApp.switchInlineQuery('pay 10 to @MSF_sss', false);
       };
     } else {
       payBtn.disabled = true;
-      payBtn.textContent = "این صفحه فقط در اپلیکیشن تلگرام کار می‌کند.";
+      payBtn.textContent = "فقط در اپلیکیشن تلگرام قابل استفاده است.";
     }
   </script>
 </body>
